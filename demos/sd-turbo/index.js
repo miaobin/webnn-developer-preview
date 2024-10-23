@@ -35,6 +35,7 @@ function getConfig() {
       : "models",
     mode: "none",
     safetychecker: true,
+    iobinding: false,
     provider: "webnn",
     devicetype: "gpu",
     threads: "1",
@@ -79,6 +80,7 @@ function randn_latents(shape, noise_sigma) {
   return data;
 }
 
+let mlContext = null;
 let textEncoderFetchProgress = 0;
 let unetFetchProgress = 0;
 let vaeDecoderFetchProgress = 0;
@@ -233,10 +235,13 @@ async function load_models(models) {
       let modelUrl;
       if (name == "text_encoder") {
         modelNameInLog = "Text Encoder";
-        modelUrl = `${config.model}/${name}/model_layernorm.onnx`;
+        modelUrl = `${config.model}/${name}/model_layernorm_iofp32.onnx`;
       } else if (name == "unet") {
         modelNameInLog = "UNet";
-        modelUrl = `${config.model}/${name}/model_layernorm.onnx`;
+        modelUrl = `${config.model}/${name}/model_layernorm_iofp32.onnx`;
+      } else if (name == "eulera_step") {
+        modelNameInLog = "EulerA Step";
+        modelUrl = `${config.model}/${name}/eulera_step_fp32.onnx`;
       } else if (name == "vae_decoder") {
         modelNameInLog = "VAE Decoder";
         modelUrl = `${config.model}/${name}/model.onnx`;
@@ -335,44 +340,7 @@ async function load_models(models) {
 }
 
 const config = getConfig();
-
-let models = {
-  unet: {
-    // original model from dw, then wm dump new one from local graph optimization.
-    url: "unet/model_layernorm.onnx",
-    size: "1.61GB",
-    opt: { graphOptimizationLevel: "disabled" }, // avoid wasm heap issue (need Wasm memory 64)
-  },
-  text_encoder: {
-    // orignal model from gu, wm convert the output to fp16.
-    url: "text_encoder/model_layernorm.onnx",
-    size: "649MB",
-    opt: { graphOptimizationLevel: "disabled" },
-    // opt: { freeDimensionOverrides: { batch_size: 1, sequence_length: 77 } },
-  },
-  vae_decoder: {
-    // use gu's model has precision lose in webnn caused by instanceNorm op,
-    // covert the model to run instanceNorm in fp32 (insert cast nodes).
-    url: "vae_decoder/model.onnx",
-    size: "94.5MB",
-    // opt: { freeDimensionOverrides: { batch_size: 1, num_channels_latent: 4, height_latent: 64, width_latent: 64 } }
-    opt: {
-      freeDimensionOverrides: { batch: 1, channels: 4, height: 64, width: 64 },
-    },
-  },
-  safety_checker: {
-    url: "safety_checker/model.onnx",
-    size: "580MB",
-    opt: {
-      freeDimensionOverrides: {
-        batch: 1,
-        channels: 3,
-        height: 224,
-        width: 224,
-      },
-    },
-  },
-};
+let models = {};
 
 let progress = 0;
 let inferenceProgress = 0;
@@ -600,7 +568,7 @@ async function generate_image() {
 
     // text_encoder
     let start = performance.now();
-    const { last_hidden_state } = await models.text_encoder.sess.run({
+    const { last_hidden_state_fp32 } = await models.text_encoder.sess.run({
       input_ids: new ort.Tensor("int32", input_ids, [1, input_ids.length]),
     });
     let sessionRunTimeTextEncode = (performance.now() - start).toFixed(2);
@@ -632,17 +600,15 @@ async function generate_image() {
       // unet
       start = performance.now();
       let feed = {
-        sample: new ort.Tensor(
-          "float16",
-          convertToUint16Array(latent_model_input.data),
+        'sample_fp32': new ort.Tensor(
+          "float32",
+          latent_model_input.data,
           latent_model_input.dims
         ),
-        timestep: new ort.Tensor("float16", new Uint16Array([toHalf(999)]), [
-          1,
-        ]),
-        encoder_hidden_states: last_hidden_state,
+        'timestep_fp32': new ort.Tensor("float32", new Float32Array([999]), [1]),
+        'encoder_hidden_states_fp32': last_hidden_state_fp32,
       };
-      let { out_sample } = await models.unet.sess.run(feed);
+      let { out_sample_fp32 } = await models.unet.sess.run(feed);
       let unetRunTime = (performance.now() - start).toFixed(2);
       document.getElementById(`unetRun${j + 1}`).innerHTML = unetRunTime;
 
@@ -655,14 +621,31 @@ async function generate_image() {
       }
 
       // scheduler
-      const new_latents = step(
-        new ort.Tensor(
-          "float32",
-          convertToFloat32Array(out_sample.data),
-          out_sample.dims
-        ),
-        latent
-      );
+      // const new_latents = step(
+      //   new ort.Tensor(
+      //     "float32",
+      //     out_sample_fp32.data,
+      //     out_sample_fp32.dims
+      //   ),
+      //   latent
+      // );
+
+      // eulera_step
+      start = performance.now();
+      const { new_latents } = await models.eulera_step.sess.run({
+        'input_sample': out_sample_fp32,
+        'latent': latent,
+      });
+      let eulerAStepRunTime = (performance.now() - start).toFixed(2);
+      if (getMode()) {
+        log(
+          `[Session Run][Image ${
+            j + 1
+          }] EulerA Step execution time: ${eulerAStepRunTime}ms`
+        );
+      } else {
+        log(`[Session Run][Image ${j + 1}] EulerA Step completed`);
+      }
 
       // vae_decoder
       start = performance.now();
@@ -770,7 +753,7 @@ async function generate_image() {
       // draw_out_image(out_image);
     }
     // this is a gpu-buffer we own, so we need to dispose it
-    last_hidden_state.dispose();
+    last_hidden_state_fp32.dispose();
     log("[Info] Images generation completed");
   } catch (e) {
     log("[Error] " + e);
@@ -1032,6 +1015,7 @@ const updateLoadWave = (value) => {
 };
 
 const ui = async () => {
+  mlContext = await navigator.ml.createContext({ 'deviceType' : config.devicetype });
   const prompt = document.querySelector("#user-input");
   const title = document.querySelector("#title");
   const dev = document.querySelector("#dev");
@@ -1135,9 +1119,18 @@ const ui = async () => {
         opt.executionProviders = [
           {
             name: "webnn",
-            deviceType: config.devicetype
+            deviceType: config.devicetype,
+            context: mlContext,
           },
         ];
+        if (config.iobinding) {
+          opt.preferredOutputLocation = {
+            last_hidden_state_fp32: "ml-tensor",
+            out_sample_fp32: "ml-tensor",
+            new_latents: "ml-tensor",
+            sample: "cpu",
+          };
+        }
       }
       break;
   }
@@ -1199,32 +1192,40 @@ const ui = async () => {
     scTr.setAttribute("class", "hide");
   }
 
-  if(!getSafetyChecker()) {
-    models = {
-      unet: {
-        // original model from dw, then wm dump new one from local graph optimization.
-        url: "unet/model_layernorm.onnx",
-        size: "1.61GB",
-        opt: { graphOptimizationLevel: "disabled" }, // avoid wasm heap issue (need Wasm memory 64)
-      },
-      text_encoder: {
-        // orignal model from gu, wm convert the output to fp16.
-        url: "text_encoder/model_layernorm.onnx",
-        size: "649MB",
-        opt: { graphOptimizationLevel: "disabled" },
-        // opt: { freeDimensionOverrides: { batch_size: 1, sequence_length: 77 } },
-      },
-      vae_decoder: {
-        // use gu's model has precision lose in webnn caused by instanceNorm op,
-        // covert the model to run instanceNorm in fp32 (insert cast nodes).
-        url: "vae_decoder/model.onnx",
-        size: "94.5MB",
-        // opt: { freeDimensionOverrides: { batch_size: 1, num_channels_latent: 4, height_latent: 64, width_latent: 64 } }
-        opt: {
-          freeDimensionOverrides: { batch: 1, channels: 4, height: 64, width: 64 },
-        },
-      }
-    };
+  models = {
+    unet: {
+      // original model from dw, then wm dump new one from local graph optimization.
+      url: "unet/model_layernorm_iofp32.onnx",
+      size: "1.61GB",
+      opt: { graphOptimizationLevel: "disabled" }, // avoid wasm heap issue (need Wasm memory 64)
+    },
+    text_encoder: {
+      // orignal model from gu, wm convert the output to fp16.
+      url: "text_encoder/model_layernorm_iofp32.onnx",
+      size: "649MB",
+      opt: { graphOptimizationLevel: "disabled" },
+      // opt: { freeDimensionOverrides: { batch_size: 1, sequence_length: 77 } },
+    },
+    eulera_step: {
+      url: "eulera_step/eulera_step_fp32.onnx",
+      size: "715B",
+      opt: { graphOptimizationLevel: "disabled" },
+    },
+    vae_decoder: {
+      // use gu's model has precision lose in webnn caused by instanceNorm op,
+      // covert the model to run instanceNorm in fp32 (insert cast nodes).
+      url: "vae_decoder/model.onnx",
+      size: "94.5MB",
+      opt: { freeDimensionOverrides: { batch: 1, channels: 4, height: 64, width: 64 } },
+    },
+  }
+
+  if (getSafetyChecker()) {
+    models.safety_checker = {
+      url: "safety_checker/model.onnx",
+      size: "580MB",
+      opt: { freeDimensionOverrides: { batch: 1, channels: 3, height: 224, width: 224 } },
+    }
   }
 };
 
