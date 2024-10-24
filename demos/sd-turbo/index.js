@@ -207,6 +207,10 @@ const getSafetyChecker = () => {
   }
 };
 
+const getIobinding = () => {
+    return (getQueryValue("iobinding") === "true") ? true : false;
+};
+
 const updateProgress = () => {
     progress =
     textEncoderFetchProgress +
@@ -1123,7 +1127,7 @@ const ui = async () => {
             context: mlContext,
           },
         ];
-        if (config.iobinding) {
+        if (getIobinding()) {
           opt.preferredOutputLocation = {
             last_hidden_state_fp32: "ml-tensor",
             out_sample_fp32: "ml-tensor",
