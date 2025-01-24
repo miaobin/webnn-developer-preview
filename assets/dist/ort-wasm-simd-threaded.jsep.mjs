@@ -669,8 +669,8 @@ function createWasm() {
   wasmExports = instance.exports;
   wasmExports = Asyncify.instrumentWasmExports(wasmExports);
   wasmExports = applySignatureConversions(wasmExports);
-  registerTLSInit(wasmExports["ib"]);
-  addOnInit(wasmExports["Ba"]);
+  registerTLSInit(wasmExports["jb"]);
+  addOnInit(wasmExports["Ca"]);
   wasmModule = module;
   removeRunDependency("wasm-instantiate");
   return wasmExports;
@@ -693,7 +693,7 @@ function createWasm() {
 }
 
 var ASM_CONSTS = {
- 894292: ($0, $1, $2, $3, $4) => {
+ 838020: ($0, $1, $2, $3, $4) => {
   if (typeof Module == "undefined" || !Module.MountedFiles) {
    return 1;
   }
@@ -731,264 +731,264 @@ var ASM_CONSTS = {
    return 4;
   }
  },
- 895007: ($0, $1, $2) => {
+ 838735: ($0, $1, $2) => {
   Module.jsepUploadTensor($0, GROWABLE_HEAP_U8().subarray($1 >>> 0, $1 + $2 >>> 0));
  },
- 895070: () => Module.jsepReserveTensorId(),
- 895111: $0 => {
+ 838798: () => Module.jsepReserveTensorId(),
+ 838839: $0 => {
   Module.jsepReleaseTensorId($0);
  },
- 895147: () => {
+ 838875: () => {
   Module.jsepCaptureBegin();
  },
- 895178: () => {
+ 838906: () => {
   Module.jsepCaptureEnd();
  },
- 895207: () => {
+ 838935: () => {
   Module.jsepReplay();
  },
- 895232: $0 => Module.jsepAlloc($0),
- 895265: $0 => Module.jsepFree($0),
- 895297: ($0, $1, $2) => {
+ 838960: $0 => Module.jsepAlloc($0),
+ 838993: $0 => Module.jsepFree($0),
+ 839025: ($0, $1, $2) => {
   Module.jsepCopy(Number($0), Number($1), Number($2), true);
  },
- 895360: ($0, $1, $2) => {
+ 839088: ($0, $1, $2) => {
   Module.jsepCopy(Number($0), Number($1), Number($2));
  },
- 895417: () => (typeof wasmOffsetConverter !== "undefined"),
- 895474: $0 => {
+ 839145: () => (typeof wasmOffsetConverter !== "undefined"),
+ 839202: $0 => {
   Module.jsepCreateKernel("Abs", $0, undefined);
  },
- 895525: $0 => {
+ 839253: $0 => {
   Module.jsepCreateKernel("Neg", $0, undefined);
  },
- 895576: $0 => {
+ 839304: $0 => {
   Module.jsepCreateKernel("Floor", $0, undefined);
  },
- 895629: $0 => {
+ 839357: $0 => {
   Module.jsepCreateKernel("Ceil", $0, undefined);
  },
- 895681: $0 => {
+ 839409: $0 => {
   Module.jsepCreateKernel("Reciprocal", $0, undefined);
  },
- 895739: $0 => {
+ 839467: $0 => {
   Module.jsepCreateKernel("Sqrt", $0, undefined);
  },
- 895791: $0 => {
+ 839519: $0 => {
   Module.jsepCreateKernel("Exp", $0, undefined);
  },
- 895842: $0 => {
+ 839570: $0 => {
   Module.jsepCreateKernel("Erf", $0, undefined);
  },
- 895893: $0 => {
+ 839621: $0 => {
   Module.jsepCreateKernel("Sigmoid", $0, undefined);
  },
- 895948: ($0, $1, $2) => {
+ 839676: ($0, $1, $2) => {
   Module.jsepCreateKernel("HardSigmoid", $0, ({
    "alpha": $1,
    "beta": $2
   }));
  },
- 896027: $0 => {
+ 839755: $0 => {
   Module.jsepCreateKernel("Log", $0, undefined);
  },
- 896078: $0 => {
+ 839806: $0 => {
   Module.jsepCreateKernel("Sin", $0, undefined);
  },
- 896129: $0 => {
+ 839857: $0 => {
   Module.jsepCreateKernel("Cos", $0, undefined);
  },
- 896180: $0 => {
+ 839908: $0 => {
   Module.jsepCreateKernel("Tan", $0, undefined);
  },
- 896231: $0 => {
+ 839959: $0 => {
   Module.jsepCreateKernel("Asin", $0, undefined);
  },
- 896283: $0 => {
+ 840011: $0 => {
   Module.jsepCreateKernel("Acos", $0, undefined);
  },
- 896335: $0 => {
+ 840063: $0 => {
   Module.jsepCreateKernel("Atan", $0, undefined);
  },
- 896387: $0 => {
+ 840115: $0 => {
   Module.jsepCreateKernel("Sinh", $0, undefined);
  },
- 896439: $0 => {
+ 840167: $0 => {
   Module.jsepCreateKernel("Cosh", $0, undefined);
  },
- 896491: $0 => {
+ 840219: $0 => {
   Module.jsepCreateKernel("Asinh", $0, undefined);
  },
- 896544: $0 => {
+ 840272: $0 => {
   Module.jsepCreateKernel("Acosh", $0, undefined);
  },
- 896597: $0 => {
+ 840325: $0 => {
   Module.jsepCreateKernel("Atanh", $0, undefined);
  },
- 896650: $0 => {
+ 840378: $0 => {
   Module.jsepCreateKernel("Tanh", $0, undefined);
  },
- 896702: $0 => {
+ 840430: $0 => {
   Module.jsepCreateKernel("Not", $0, undefined);
  },
- 896753: ($0, $1, $2) => {
+ 840481: ($0, $1, $2) => {
   Module.jsepCreateKernel("Clip", $0, ({
    "min": $1,
    "max": $2
   }));
  },
- 896822: $0 => {
+ 840550: $0 => {
   Module.jsepCreateKernel("Clip", $0, undefined);
  },
- 896874: ($0, $1) => {
+ 840602: ($0, $1) => {
   Module.jsepCreateKernel("Elu", $0, ({
    "alpha": $1
   }));
  },
- 896932: $0 => {
+ 840660: $0 => {
   Module.jsepCreateKernel("Gelu", $0, undefined);
  },
- 896984: $0 => {
+ 840712: $0 => {
   Module.jsepCreateKernel("Relu", $0, undefined);
  },
- 897036: ($0, $1) => {
+ 840764: ($0, $1) => {
   Module.jsepCreateKernel("LeakyRelu", $0, ({
    "alpha": $1
   }));
  },
- 897100: ($0, $1) => {
+ 840828: ($0, $1) => {
   Module.jsepCreateKernel("ThresholdedRelu", $0, ({
    "alpha": $1
   }));
  },
- 897170: ($0, $1) => {
+ 840898: ($0, $1) => {
   Module.jsepCreateKernel("Cast", $0, ({
    "to": $1
   }));
  },
- 897228: $0 => {
+ 840956: $0 => {
   Module.jsepCreateKernel("Add", $0, undefined);
  },
- 897279: $0 => {
+ 841007: $0 => {
   Module.jsepCreateKernel("Sub", $0, undefined);
  },
- 897330: $0 => {
+ 841058: $0 => {
   Module.jsepCreateKernel("Mul", $0, undefined);
  },
- 897381: $0 => {
+ 841109: $0 => {
   Module.jsepCreateKernel("Div", $0, undefined);
  },
- 897432: $0 => {
+ 841160: $0 => {
   Module.jsepCreateKernel("Pow", $0, undefined);
  },
- 897483: $0 => {
+ 841211: $0 => {
   Module.jsepCreateKernel("Equal", $0, undefined);
  },
- 897536: $0 => {
+ 841264: $0 => {
   Module.jsepCreateKernel("Greater", $0, undefined);
  },
- 897591: $0 => {
+ 841319: $0 => {
   Module.jsepCreateKernel("GreaterOrEqual", $0, undefined);
  },
- 897653: $0 => {
+ 841381: $0 => {
   Module.jsepCreateKernel("Less", $0, undefined);
  },
- 897705: $0 => {
+ 841433: $0 => {
   Module.jsepCreateKernel("LessOrEqual", $0, undefined);
  },
- 897764: ($0, $1, $2, $3, $4) => {
+ 841492: ($0, $1, $2, $3, $4) => {
   Module.jsepCreateKernel("ReduceMean", $0, ({
    "keepDims": !!$1,
    "noopWithEmptyAxes": !!$2,
    "axes": $3 ? (Array.from(GROWABLE_HEAP_I32().subarray(Number($3) >>> 0, Number($4) >>> 0))) : []
   }));
  },
- 897939: ($0, $1, $2, $3, $4) => {
+ 841667: ($0, $1, $2, $3, $4) => {
   Module.jsepCreateKernel("ReduceMax", $0, ({
    "keepDims": !!$1,
    "noopWithEmptyAxes": !!$2,
    "axes": $3 ? (Array.from(GROWABLE_HEAP_I32().subarray(Number($3) >>> 0, Number($4) >>> 0))) : []
   }));
  },
- 898113: ($0, $1, $2, $3, $4) => {
+ 841841: ($0, $1, $2, $3, $4) => {
   Module.jsepCreateKernel("ReduceMin", $0, ({
    "keepDims": !!$1,
    "noopWithEmptyAxes": !!$2,
    "axes": $3 ? (Array.from(GROWABLE_HEAP_I32().subarray(Number($3) >>> 0, Number($4) >>> 0))) : []
   }));
  },
- 898287: ($0, $1, $2, $3, $4) => {
+ 842015: ($0, $1, $2, $3, $4) => {
   Module.jsepCreateKernel("ReduceProd", $0, ({
    "keepDims": !!$1,
    "noopWithEmptyAxes": !!$2,
    "axes": $3 ? (Array.from(GROWABLE_HEAP_I32().subarray(Number($3) >>> 0, Number($4) >>> 0))) : []
   }));
  },
- 898462: ($0, $1, $2, $3, $4) => {
+ 842190: ($0, $1, $2, $3, $4) => {
   Module.jsepCreateKernel("ReduceSum", $0, ({
    "keepDims": !!$1,
    "noopWithEmptyAxes": !!$2,
    "axes": $3 ? (Array.from(GROWABLE_HEAP_I32().subarray(Number($3) >>> 0, Number($4) >>> 0))) : []
   }));
  },
- 898636: ($0, $1, $2, $3, $4) => {
+ 842364: ($0, $1, $2, $3, $4) => {
   Module.jsepCreateKernel("ReduceL1", $0, ({
    "keepDims": !!$1,
    "noopWithEmptyAxes": !!$2,
    "axes": $3 ? (Array.from(GROWABLE_HEAP_I32().subarray(Number($3) >>> 0, Number($4) >>> 0))) : []
   }));
  },
- 898809: ($0, $1, $2, $3, $4) => {
+ 842537: ($0, $1, $2, $3, $4) => {
   Module.jsepCreateKernel("ReduceL2", $0, ({
    "keepDims": !!$1,
    "noopWithEmptyAxes": !!$2,
    "axes": $3 ? (Array.from(GROWABLE_HEAP_I32().subarray(Number($3) >>> 0, Number($4) >>> 0))) : []
   }));
  },
- 898982: ($0, $1, $2, $3, $4) => {
+ 842710: ($0, $1, $2, $3, $4) => {
   Module.jsepCreateKernel("ReduceLogSum", $0, ({
    "keepDims": !!$1,
    "noopWithEmptyAxes": !!$2,
    "axes": $3 ? (Array.from(GROWABLE_HEAP_I32().subarray(Number($3) >>> 0, Number($4) >>> 0))) : []
   }));
  },
- 899159: ($0, $1, $2, $3, $4) => {
+ 842887: ($0, $1, $2, $3, $4) => {
   Module.jsepCreateKernel("ReduceSumSquare", $0, ({
    "keepDims": !!$1,
    "noopWithEmptyAxes": !!$2,
    "axes": $3 ? (Array.from(GROWABLE_HEAP_I32().subarray(Number($3) >>> 0, Number($4) >>> 0))) : []
   }));
  },
- 899339: ($0, $1, $2, $3, $4) => {
+ 843067: ($0, $1, $2, $3, $4) => {
   Module.jsepCreateKernel("ReduceLogSumExp", $0, ({
    "keepDims": !!$1,
    "noopWithEmptyAxes": !!$2,
    "axes": $3 ? (Array.from(GROWABLE_HEAP_I32().subarray(Number($3) >>> 0, Number($4) >>> 0))) : []
   }));
  },
- 899519: $0 => {
+ 843247: $0 => {
   Module.jsepCreateKernel("Where", $0, undefined);
  },
- 899572: ($0, $1, $2) => {
+ 843300: ($0, $1, $2) => {
   Module.jsepCreateKernel("Transpose", $0, ({
    "perm": $1 ? Array.from(GROWABLE_HEAP_I32().subarray(Number($1) >>> 0, Number($2) >>> 0)) : []
   }));
  },
- 899696: ($0, $1, $2, $3) => {
+ 843424: ($0, $1, $2, $3) => {
   Module.jsepCreateKernel("DepthToSpace", $0, ({
    "blocksize": $1,
    "mode": UTF8ToString($2),
    "format": $3 ? "NHWC" : "NCHW"
   }));
  },
- 899829: ($0, $1, $2, $3) => {
+ 843557: ($0, $1, $2, $3) => {
   Module.jsepCreateKernel("DepthToSpace", $0, ({
    "blocksize": $1,
    "mode": UTF8ToString($2),
    "format": $3 ? "NHWC" : "NCHW"
   }));
  },
- 899962: ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) => {
+ 843690: ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) => {
   Module.jsepCreateKernel("ConvTranspose", $0, ({
    "format": $8 ? "NHWC" : "NCHW",
    "autoPad": $1,
@@ -1003,7 +1003,7 @@ var ASM_CONSTS = {
    "activation": UTF8ToString($14)
   }));
  },
- 900395: ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) => {
+ 844123: ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) => {
   Module.jsepCreateKernel("ConvTranspose", $0, ({
    "format": $7 ? "NHWC" : "NCHW",
    "autoPad": $1,
@@ -1018,7 +1018,7 @@ var ASM_CONSTS = {
    "activation": UTF8ToString($13)
   }));
  },
- 901056: ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) => {
+ 844784: ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) => {
   Module.jsepCreateKernel("ConvTranspose", $0, ({
    "format": $8 ? "NHWC" : "NCHW",
    "autoPad": $1,
@@ -1033,7 +1033,7 @@ var ASM_CONSTS = {
    "activation": UTF8ToString($14)
   }));
  },
- 901489: ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) => {
+ 845217: ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) => {
   Module.jsepCreateKernel("ConvTranspose", $0, ({
    "format": $7 ? "NHWC" : "NCHW",
    "autoPad": $1,
@@ -1048,12 +1048,12 @@ var ASM_CONSTS = {
    "activation": UTF8ToString($13)
   }));
  },
- 902150: ($0, $1) => {
+ 845878: ($0, $1) => {
   Module.jsepCreateKernel("GlobalAveragePool", $0, ({
    "format": $1 ? "NHWC" : "NCHW"
   }));
  },
- 902241: ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) => {
+ 845969: ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) => {
   Module.jsepCreateKernel("AveragePool", $0, ({
    "format": $13 ? "NHWC" : "NCHW",
    "auto_pad": $1,
@@ -1066,12 +1066,12 @@ var ASM_CONSTS = {
    "strides": $11 ? Array.from(GROWABLE_HEAP_I32().subarray(Number($11) >>> 0, Number($12) >>> 0)) : []
   }));
  },
- 902720: ($0, $1) => {
+ 846448: ($0, $1) => {
   Module.jsepCreateKernel("GlobalAveragePool", $0, ({
    "format": $1 ? "NHWC" : "NCHW"
   }));
  },
- 902811: ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) => {
+ 846539: ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) => {
   Module.jsepCreateKernel("AveragePool", $0, ({
    "format": $13 ? "NHWC" : "NCHW",
    "auto_pad": $1,
@@ -1084,12 +1084,12 @@ var ASM_CONSTS = {
    "strides": $11 ? Array.from(GROWABLE_HEAP_I32().subarray(Number($11) >>> 0, Number($12) >>> 0)) : []
   }));
  },
- 903290: ($0, $1) => {
+ 847018: ($0, $1) => {
   Module.jsepCreateKernel("GlobalMaxPool", $0, ({
    "format": $1 ? "NHWC" : "NCHW"
   }));
  },
- 903377: ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) => {
+ 847105: ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) => {
   Module.jsepCreateKernel("MaxPool", $0, ({
    "format": $13 ? "NHWC" : "NCHW",
    "auto_pad": $1,
@@ -1102,12 +1102,12 @@ var ASM_CONSTS = {
    "strides": $11 ? Array.from(GROWABLE_HEAP_I32().subarray(Number($11) >>> 0, Number($12) >>> 0)) : []
   }));
  },
- 903852: ($0, $1) => {
+ 847580: ($0, $1) => {
   Module.jsepCreateKernel("GlobalMaxPool", $0, ({
    "format": $1 ? "NHWC" : "NCHW"
   }));
  },
- 903939: ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) => {
+ 847667: ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) => {
   Module.jsepCreateKernel("MaxPool", $0, ({
    "format": $13 ? "NHWC" : "NCHW",
    "auto_pad": $1,
@@ -1120,7 +1120,7 @@ var ASM_CONSTS = {
    "strides": $11 ? Array.from(GROWABLE_HEAP_I32().subarray(Number($11) >>> 0, Number($12) >>> 0)) : []
   }));
  },
- 904414: ($0, $1, $2, $3, $4) => {
+ 848142: ($0, $1, $2, $3, $4) => {
   Module.jsepCreateKernel("Gemm", $0, ({
    "alpha": $1,
    "beta": $2,
@@ -1128,54 +1128,59 @@ var ASM_CONSTS = {
    "transB": $4
   }));
  },
- 904518: $0 => {
+ 848246: $0 => {
   Module.jsepCreateKernel("MatMul", $0, undefined);
  },
- 904572: ($0, $1, $2, $3) => {
+ 848300: ($0, $1, $2, $3) => {
   Module.jsepCreateKernel("ArgMax", $0, ({
    "keepDims": !!$1,
    "selectLastIndex": !!$2,
    "axis": $3
   }));
  },
- 904680: ($0, $1, $2, $3) => {
+ 848408: ($0, $1, $2, $3) => {
   Module.jsepCreateKernel("ArgMin", $0, ({
    "keepDims": !!$1,
    "selectLastIndex": !!$2,
    "axis": $3
   }));
  },
- 904788: ($0, $1) => {
+ 848516: ($0, $1) => {
   Module.jsepCreateKernel("Softmax", $0, ({
    "axis": $1
   }));
  },
- 904851: ($0, $1) => {
+ 848579: ($0, $1) => {
   Module.jsepCreateKernel("Concat", $0, ({
    "axis": $1
   }));
  },
- 904911: ($0, $1, $2, $3, $4) => {
+ 848639: ($0, $1, $2, $3, $4) => {
   Module.jsepCreateKernel("Split", $0, ({
    "axis": $1,
    "numOutputs": $2,
    "splitSizes": $3 ? Array.from(GROWABLE_HEAP_I32().subarray(Number($3) >>> 0, Number($4) >>> 0)) : []
   }));
  },
- 905067: $0 => {
+ 848795: $0 => {
   Module.jsepCreateKernel("Expand", $0, undefined);
  },
- 905121: ($0, $1) => {
+ 848849: ($0, $1) => {
   Module.jsepCreateKernel("Gather", $0, ({
    "axis": Number($1)
   }));
  },
- 905192: ($0, $1) => {
+ 848920: ($0, $1) => {
   Module.jsepCreateKernel("GatherElements", $0, ({
    "axis": Number($1)
   }));
  },
- 905271: ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10) => {
+ 848999: ($0, $1) => {
+  Module.jsepCreateKernel("GatherND", $0, ({
+   "batch_dims": Number($1)
+  }));
+ },
+ 849078: ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10) => {
   Module.jsepCreateKernel("Resize", $0, ({
    "antialias": $1,
    "axes": $2 ? Array.from(GROWABLE_HEAP_I32().subarray(Number($2) >>> 0, Number($3) >>> 0)) : [],
@@ -1188,44 +1193,44 @@ var ASM_CONSTS = {
    "nearestMode": UTF8ToString($10)
   }));
  },
- 905633: ($0, $1, $2, $3, $4, $5, $6) => {
+ 849440: ($0, $1, $2, $3, $4, $5, $6) => {
   Module.jsepCreateKernel("Slice", $0, ({
    "starts": $1 ? Array.from(GROWABLE_HEAP_I32().subarray(Number($1) >>> 0, Number($2) >>> 0)) : [],
    "ends": $3 ? Array.from(GROWABLE_HEAP_I32().subarray(Number($3) >>> 0, Number($4) >>> 0)) : [],
    "axes": $5 ? Array.from(GROWABLE_HEAP_I32().subarray(Number($5) >>> 0, Number($6) >>> 0)) : []
   }));
  },
- 905897: $0 => {
+ 849704: $0 => {
   Module.jsepCreateKernel("Tile", $0, undefined);
  },
- 905949: ($0, $1, $2) => {
+ 849756: ($0, $1, $2) => {
   Module.jsepCreateKernel("InstanceNormalization", $0, ({
    "epsilon": $1,
    "format": $2 ? "NHWC" : "NCHW"
   }));
  },
- 906063: ($0, $1, $2) => {
+ 849870: ($0, $1, $2) => {
   Module.jsepCreateKernel("InstanceNormalization", $0, ({
    "epsilon": $1,
    "format": $2 ? "NHWC" : "NCHW"
   }));
  },
- 906177: $0 => {
+ 849984: $0 => {
   Module.jsepCreateKernel("Range", $0, undefined);
  },
- 906230: ($0, $1) => {
+ 850037: ($0, $1) => {
   Module.jsepCreateKernel("Einsum", $0, ({
    "equation": UTF8ToString($1)
   }));
  },
- 906311: ($0, $1, $2, $3, $4) => {
+ 850118: ($0, $1, $2, $3, $4) => {
   Module.jsepCreateKernel("Pad", $0, ({
    "mode": $1,
    "value": $2,
    "pads": $3 ? Array.from(GROWABLE_HEAP_I32().subarray(Number($3) >>> 0, Number($4) >>> 0)) : []
   }));
  },
- 906454: ($0, $1, $2, $3, $4, $5) => {
+ 850261: ($0, $1, $2, $3, $4, $5) => {
   Module.jsepCreateKernel("BatchNormalization", $0, ({
    "epsilon": $1,
    "momentum": $2,
@@ -1234,7 +1239,7 @@ var ASM_CONSTS = {
    "format": $5 ? "NHWC" : "NCHW"
   }));
  },
- 906623: ($0, $1, $2, $3, $4, $5) => {
+ 850430: ($0, $1, $2, $3, $4, $5) => {
   Module.jsepCreateKernel("BatchNormalization", $0, ({
    "epsilon": $1,
    "momentum": $2,
@@ -1243,19 +1248,19 @@ var ASM_CONSTS = {
    "format": $5 ? "NHWC" : "NCHW"
   }));
  },
- 906792: ($0, $1, $2) => {
+ 850599: ($0, $1, $2) => {
   Module.jsepCreateKernel("CumSum", $0, ({
    "exclusive": Number($1),
    "reverse": Number($2)
   }));
  },
- 906889: ($0, $1, $2) => {
+ 850696: ($0, $1, $2) => {
   Module.jsepCreateKernel("DequantizeLinear", $0, ({
    "axis": $1,
    "blockSize": $2
   }));
  },
- 906979: ($0, $1, $2, $3, $4) => {
+ 850786: ($0, $1, $2, $3, $4) => {
   Module.jsepCreateKernel("GridSample", $0, ({
    "align_corners": $1,
    "mode": UTF8ToString($2),
@@ -1263,7 +1268,7 @@ var ASM_CONSTS = {
    "format": $4 ? "NHWC" : "NCHW"
   }));
  },
- 907149: ($0, $1, $2, $3, $4) => {
+ 850956: ($0, $1, $2, $3, $4) => {
   Module.jsepCreateKernel("GridSample", $0, ({
    "align_corners": $1,
    "mode": UTF8ToString($2),
@@ -1271,7 +1276,12 @@ var ASM_CONSTS = {
    "format": $4 ? "NHWC" : "NCHW"
   }));
  },
- 907319: ($0, $1, $2, $3, $4, $5, $6, $7, $8) => {
+ 851126: ($0, $1) => {
+  Module.jsepCreateKernel("ScatterND", $0, ({
+   "reduction": UTF8ToString($1)
+  }));
+ },
+ 851211: ($0, $1, $2, $3, $4, $5, $6, $7, $8) => {
   Module.jsepCreateKernel("Attention", $0, ({
    "numHeads": $1,
    "isUnidirectional": $2,
@@ -1282,16 +1292,16 @@ var ASM_CONSTS = {
    "pastPresentShareBuffer": !!$8
   }));
  },
- 907591: $0 => {
+ 851483: $0 => {
   Module.jsepCreateKernel("BiasAdd", $0, undefined);
  },
- 907646: $0 => {
+ 851538: $0 => {
   Module.jsepCreateKernel("BiasSplitGelu", $0, undefined);
  },
- 907707: $0 => {
+ 851599: $0 => {
   Module.jsepCreateKernel("FastGelu", $0, undefined);
  },
- 907763: ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) => {
+ 851655: ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) => {
   Module.jsepCreateKernel("Conv", $0, ({
    "format": $11 ? "NHWC" : "NCHW",
    "auto_pad": $1,
@@ -1305,10 +1315,10 @@ var ASM_CONSTS = {
    "activation_params": $14 ? Array.from(GROWABLE_HEAP_F32().subarray(Number($14) >>> 0, Number($15) >>> 0)) : []
   }));
  },
- 908347: $0 => {
+ 852239: $0 => {
   Module.jsepCreateKernel("Gelu", $0, undefined);
  },
- 908399: ($0, $1, $2, $3, $4, $5, $6, $7, $8) => {
+ 852291: ($0, $1, $2, $3, $4, $5, $6, $7, $8) => {
   Module.jsepCreateKernel("GroupQueryAttention", $0, ({
    "numHeads": $1,
    "kvNumHeads": $2,
@@ -1320,21 +1330,21 @@ var ASM_CONSTS = {
    "localWindowSize": $8
   }));
  },
- 908616: ($0, $1, $2, $3) => {
+ 852508: ($0, $1, $2, $3) => {
   Module.jsepCreateKernel("LayerNormalization", $0, ({
    "axis": $1,
    "epsilon": $2,
    "simplified": !!$3
   }));
  },
- 908727: ($0, $1, $2, $3) => {
+ 852619: ($0, $1, $2, $3) => {
   Module.jsepCreateKernel("LayerNormalization", $0, ({
    "axis": $1,
    "epsilon": $2,
    "simplified": !!$3
   }));
  },
- 908838: ($0, $1, $2, $3, $4, $5) => {
+ 852730: ($0, $1, $2, $3, $4, $5) => {
   Module.jsepCreateKernel("MatMulNBits", $0, ({
    "k": $1,
    "n": $2,
@@ -1343,7 +1353,7 @@ var ASM_CONSTS = {
    "blockSize": $5
   }));
  },
- 908965: ($0, $1, $2, $3, $4, $5) => {
+ 852857: ($0, $1, $2, $3, $4, $5) => {
   Module.jsepCreateKernel("MultiHeadAttention", $0, ({
    "numHeads": $1,
    "isUnidirectional": $2,
@@ -1352,12 +1362,12 @@ var ASM_CONSTS = {
    "doRotary": $5
   }));
  },
- 909124: ($0, $1) => {
+ 853016: ($0, $1) => {
   Module.jsepCreateKernel("QuickGelu", $0, ({
    "alpha": $1
   }));
  },
- 909188: ($0, $1, $2, $3, $4) => {
+ 853080: ($0, $1, $2, $3, $4) => {
   Module.jsepCreateKernel("RotaryEmbedding", $0, ({
    "interleaved": !!$1,
    "numHeads": $2,
@@ -1365,29 +1375,29 @@ var ASM_CONSTS = {
    "scale": $4
   }));
  },
- 909327: ($0, $1, $2) => {
+ 853219: ($0, $1, $2) => {
   Module.jsepCreateKernel("SkipLayerNormalization", $0, ({
    "epsilon": $1,
    "simplified": !!$2
   }));
  },
- 909429: ($0, $1, $2) => {
+ 853321: ($0, $1, $2) => {
   Module.jsepCreateKernel("SkipLayerNormalization", $0, ({
    "epsilon": $1,
    "simplified": !!$2
   }));
  },
- 909531: ($0, $1, $2, $3) => {
+ 853423: ($0, $1, $2, $3) => {
   Module.jsepCreateKernel("GatherBlockQuantized", $0, ({
    "gatherAxis": $1,
    "quantizeAxis": $2,
    "blockSize": $3
   }));
  },
- 909652: $0 => {
+ 853544: $0 => {
   Module.jsepReleaseKernel($0);
  },
- 909686: ($0, $1) => Module.jsepRunKernel(Number($0), Number($1), Module.jsepSessionState.sessionHandle, Module.jsepSessionState.errors)
+ 853578: ($0, $1) => Module.jsepRunKernel(Number($0), Number($1), Module.jsepSessionState.sessionHandle, Module.jsepSessionState.errors)
 };
 
 function __asyncjs__jsepDownload(src_data, dst_data, bytes) {
@@ -2769,6 +2779,14 @@ function __emval_as(handle, returnType, destructorsRef) {
  return emval_returnValue(returnType, destructorsRef, handle);
 }
 
+function __emval_as_int64(handle, returnType) {
+ handle >>>= 0;
+ returnType >>>= 0;
+ handle = Emval.toValue(handle);
+ returnType = requireRegisteredType(returnType, "emval::as");
+ return returnType["toWireType"](null, handle);
+}
+
 var runAndAbortIfError = func => {
  try {
   return func();
@@ -3847,51 +3865,52 @@ function assignWasmImports() {
   /** @export */ O: HaveOffsetConverter,
   /** @export */ Q: __asyncjs__jsepDownload,
   /** @export */ b: ___cxa_throw,
-  /** @export */ Aa: ___pthread_create_js,
+  /** @export */ Ba: ___pthread_create_js,
   /** @export */ D: ___syscall_fcntl64,
-  /** @export */ za: ___syscall_fstat64,
-  /** @export */ ya: ___syscall_getcwd,
-  /** @export */ xa: ___syscall_getdents64,
-  /** @export */ wa: ___syscall_ioctl,
-  /** @export */ va: ___syscall_lstat64,
-  /** @export */ ua: ___syscall_mkdirat,
-  /** @export */ ta: ___syscall_newfstatat,
+  /** @export */ Aa: ___syscall_fstat64,
+  /** @export */ za: ___syscall_getcwd,
+  /** @export */ ya: ___syscall_getdents64,
+  /** @export */ xa: ___syscall_ioctl,
+  /** @export */ wa: ___syscall_lstat64,
+  /** @export */ va: ___syscall_mkdirat,
+  /** @export */ ua: ___syscall_newfstatat,
   /** @export */ N: ___syscall_openat,
-  /** @export */ sa: ___syscall_readlinkat,
-  /** @export */ ra: ___syscall_rmdir,
-  /** @export */ qa: ___syscall_stat64,
-  /** @export */ pa: ___syscall_unlinkat,
-  /** @export */ ka: __abort_js,
+  /** @export */ ta: ___syscall_readlinkat,
+  /** @export */ sa: ___syscall_rmdir,
+  /** @export */ ra: ___syscall_stat64,
+  /** @export */ qa: ___syscall_unlinkat,
+  /** @export */ la: __abort_js,
   /** @export */ K: __embind_register_bigint,
-  /** @export */ ja: __embind_register_bool,
-  /** @export */ ia: __embind_register_emval,
+  /** @export */ ka: __embind_register_bool,
+  /** @export */ ja: __embind_register_emval,
   /** @export */ J: __embind_register_float,
   /** @export */ v: __embind_register_integer,
   /** @export */ q: __embind_register_memory_view,
   /** @export */ I: __embind_register_std_string,
   /** @export */ B: __embind_register_std_wstring,
-  /** @export */ ha: __embind_register_void,
-  /** @export */ ga: __emscripten_get_now_is_monotonic,
-  /** @export */ fa: __emscripten_init_main_thread_js,
-  /** @export */ ea: __emscripten_notify_mailbox_postmessage,
-  /** @export */ da: __emscripten_receive_on_main_thread_js,
+  /** @export */ ia: __embind_register_void,
+  /** @export */ ha: __emscripten_get_now_is_monotonic,
+  /** @export */ ga: __emscripten_init_main_thread_js,
+  /** @export */ fa: __emscripten_notify_mailbox_postmessage,
+  /** @export */ ea: __emscripten_receive_on_main_thread_js,
   /** @export */ H: __emscripten_thread_cleanup,
-  /** @export */ ca: __emscripten_thread_mailbox_await,
-  /** @export */ ba: __emscripten_thread_set_strongref,
+  /** @export */ da: __emscripten_thread_mailbox_await,
+  /** @export */ ca: __emscripten_thread_set_strongref,
   /** @export */ t: __emval_as,
+  /** @export */ ba: __emval_as_int64,
   /** @export */ x: __emval_await,
   /** @export */ o: __emval_call,
-  /** @export */ m: __emval_call_method,
+  /** @export */ l: __emval_call_method,
   /** @export */ c: __emval_decref,
   /** @export */ n: __emval_get_global,
-  /** @export */ k: __emval_get_method_caller,
+  /** @export */ j: __emval_get_method_caller,
   /** @export */ w: __emval_get_module_property,
   /** @export */ p: __emval_get_property,
   /** @export */ f: __emval_incref,
   /** @export */ s: __emval_new_array,
-  /** @export */ l: __emval_new_array_from_memory_view,
+  /** @export */ m: __emval_new_array_from_memory_view,
   /** @export */ e: __emval_new_cstring,
-  /** @export */ j: __emval_new_object,
+  /** @export */ k: __emval_new_object,
   /** @export */ i: __emval_run_destructors,
   /** @export */ h: __emval_set_property,
   /** @export */ d: __emval_take_value,
@@ -3914,15 +3933,15 @@ function assignWasmImports() {
   /** @export */ U: _emscripten_resize_heap,
   /** @export */ T: _emscripten_stack_snapshot,
   /** @export */ S: _emscripten_stack_unwind_buffer,
-  /** @export */ oa: _environ_get,
-  /** @export */ na: _environ_sizes_get,
+  /** @export */ pa: _environ_get,
+  /** @export */ oa: _environ_sizes_get,
   /** @export */ R: _exit,
   /** @export */ C: _fd_close,
   /** @export */ M: _fd_read,
-  /** @export */ ma: _fd_seek,
+  /** @export */ na: _fd_seek,
   /** @export */ L: _fd_write,
   /** @export */ a: wasmMemory,
-  /** @export */ la: _proc_exit,
+  /** @export */ ma: _proc_exit,
   /** @export */ P: _strftime,
   /** @export */ r: _strftime_l
  };
@@ -3930,134 +3949,134 @@ function assignWasmImports() {
 
 var wasmExports = createWasm();
 
-var ___wasm_call_ctors = () => (___wasm_call_ctors = wasmExports["Ba"])();
+var ___wasm_call_ctors = () => (___wasm_call_ctors = wasmExports["Ca"])();
 
-var ___getTypeName = a0 => (___getTypeName = wasmExports["Ca"])(a0);
+var ___getTypeName = a0 => (___getTypeName = wasmExports["Da"])(a0);
 
-var __embind_initialize_bindings = () => (__embind_initialize_bindings = wasmExports["Da"])();
+var __embind_initialize_bindings = () => (__embind_initialize_bindings = wasmExports["Ea"])();
 
-var _OrtInit = Module["_OrtInit"] = (a0, a1) => (_OrtInit = Module["_OrtInit"] = wasmExports["Ea"])(a0, a1);
+var _OrtInit = Module["_OrtInit"] = (a0, a1) => (_OrtInit = Module["_OrtInit"] = wasmExports["Fa"])(a0, a1);
 
-var _OrtGetLastError = Module["_OrtGetLastError"] = (a0, a1) => (_OrtGetLastError = Module["_OrtGetLastError"] = wasmExports["Fa"])(a0, a1);
+var _OrtGetLastError = Module["_OrtGetLastError"] = (a0, a1) => (_OrtGetLastError = Module["_OrtGetLastError"] = wasmExports["Ga"])(a0, a1);
 
-var _OrtCreateSessionOptions = Module["_OrtCreateSessionOptions"] = (a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) => (_OrtCreateSessionOptions = Module["_OrtCreateSessionOptions"] = wasmExports["Ga"])(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
+var _OrtCreateSessionOptions = Module["_OrtCreateSessionOptions"] = (a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) => (_OrtCreateSessionOptions = Module["_OrtCreateSessionOptions"] = wasmExports["Ha"])(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
 
-var _OrtAppendExecutionProvider = Module["_OrtAppendExecutionProvider"] = (a0, a1) => (_OrtAppendExecutionProvider = Module["_OrtAppendExecutionProvider"] = wasmExports["Ha"])(a0, a1);
+var _OrtAppendExecutionProvider = Module["_OrtAppendExecutionProvider"] = (a0, a1) => (_OrtAppendExecutionProvider = Module["_OrtAppendExecutionProvider"] = wasmExports["Ia"])(a0, a1);
 
-var _OrtAddFreeDimensionOverride = Module["_OrtAddFreeDimensionOverride"] = (a0, a1, a2) => (_OrtAddFreeDimensionOverride = Module["_OrtAddFreeDimensionOverride"] = wasmExports["Ia"])(a0, a1, a2);
+var _OrtAddFreeDimensionOverride = Module["_OrtAddFreeDimensionOverride"] = (a0, a1, a2) => (_OrtAddFreeDimensionOverride = Module["_OrtAddFreeDimensionOverride"] = wasmExports["Ja"])(a0, a1, a2);
 
-var _OrtAddSessionConfigEntry = Module["_OrtAddSessionConfigEntry"] = (a0, a1, a2) => (_OrtAddSessionConfigEntry = Module["_OrtAddSessionConfigEntry"] = wasmExports["Ja"])(a0, a1, a2);
+var _OrtAddSessionConfigEntry = Module["_OrtAddSessionConfigEntry"] = (a0, a1, a2) => (_OrtAddSessionConfigEntry = Module["_OrtAddSessionConfigEntry"] = wasmExports["Ka"])(a0, a1, a2);
 
-var _OrtReleaseSessionOptions = Module["_OrtReleaseSessionOptions"] = a0 => (_OrtReleaseSessionOptions = Module["_OrtReleaseSessionOptions"] = wasmExports["Ka"])(a0);
+var _OrtReleaseSessionOptions = Module["_OrtReleaseSessionOptions"] = a0 => (_OrtReleaseSessionOptions = Module["_OrtReleaseSessionOptions"] = wasmExports["La"])(a0);
 
-var _OrtCreateSession = Module["_OrtCreateSession"] = (a0, a1, a2) => (_OrtCreateSession = Module["_OrtCreateSession"] = wasmExports["La"])(a0, a1, a2);
+var _OrtCreateSession = Module["_OrtCreateSession"] = (a0, a1, a2) => (_OrtCreateSession = Module["_OrtCreateSession"] = wasmExports["Ma"])(a0, a1, a2);
 
-var _OrtReleaseSession = Module["_OrtReleaseSession"] = a0 => (_OrtReleaseSession = Module["_OrtReleaseSession"] = wasmExports["Ma"])(a0);
+var _OrtReleaseSession = Module["_OrtReleaseSession"] = a0 => (_OrtReleaseSession = Module["_OrtReleaseSession"] = wasmExports["Na"])(a0);
 
-var _OrtGetInputOutputCount = Module["_OrtGetInputOutputCount"] = (a0, a1, a2) => (_OrtGetInputOutputCount = Module["_OrtGetInputOutputCount"] = wasmExports["Na"])(a0, a1, a2);
+var _OrtGetInputOutputCount = Module["_OrtGetInputOutputCount"] = (a0, a1, a2) => (_OrtGetInputOutputCount = Module["_OrtGetInputOutputCount"] = wasmExports["Oa"])(a0, a1, a2);
 
-var _OrtGetInputName = Module["_OrtGetInputName"] = (a0, a1) => (_OrtGetInputName = Module["_OrtGetInputName"] = wasmExports["Oa"])(a0, a1);
+var _OrtGetInputName = Module["_OrtGetInputName"] = (a0, a1) => (_OrtGetInputName = Module["_OrtGetInputName"] = wasmExports["Pa"])(a0, a1);
 
-var _OrtGetOutputName = Module["_OrtGetOutputName"] = (a0, a1) => (_OrtGetOutputName = Module["_OrtGetOutputName"] = wasmExports["Pa"])(a0, a1);
+var _OrtGetOutputName = Module["_OrtGetOutputName"] = (a0, a1) => (_OrtGetOutputName = Module["_OrtGetOutputName"] = wasmExports["Qa"])(a0, a1);
 
-var _OrtFree = Module["_OrtFree"] = a0 => (_OrtFree = Module["_OrtFree"] = wasmExports["Qa"])(a0);
+var _OrtFree = Module["_OrtFree"] = a0 => (_OrtFree = Module["_OrtFree"] = wasmExports["Ra"])(a0);
 
-var _OrtCreateTensor = Module["_OrtCreateTensor"] = (a0, a1, a2, a3, a4, a5) => (_OrtCreateTensor = Module["_OrtCreateTensor"] = wasmExports["Ra"])(a0, a1, a2, a3, a4, a5);
+var _OrtCreateTensor = Module["_OrtCreateTensor"] = (a0, a1, a2, a3, a4, a5) => (_OrtCreateTensor = Module["_OrtCreateTensor"] = wasmExports["Sa"])(a0, a1, a2, a3, a4, a5);
 
-var _OrtGetTensorData = Module["_OrtGetTensorData"] = (a0, a1, a2, a3, a4) => (_OrtGetTensorData = Module["_OrtGetTensorData"] = wasmExports["Sa"])(a0, a1, a2, a3, a4);
+var _OrtGetTensorData = Module["_OrtGetTensorData"] = (a0, a1, a2, a3, a4) => (_OrtGetTensorData = Module["_OrtGetTensorData"] = wasmExports["Ta"])(a0, a1, a2, a3, a4);
 
-var _OrtReleaseTensor = Module["_OrtReleaseTensor"] = a0 => (_OrtReleaseTensor = Module["_OrtReleaseTensor"] = wasmExports["Ta"])(a0);
+var _OrtReleaseTensor = Module["_OrtReleaseTensor"] = a0 => (_OrtReleaseTensor = Module["_OrtReleaseTensor"] = wasmExports["Ua"])(a0);
 
-var _OrtCreateRunOptions = Module["_OrtCreateRunOptions"] = (a0, a1, a2, a3) => (_OrtCreateRunOptions = Module["_OrtCreateRunOptions"] = wasmExports["Ua"])(a0, a1, a2, a3);
+var _OrtCreateRunOptions = Module["_OrtCreateRunOptions"] = (a0, a1, a2, a3) => (_OrtCreateRunOptions = Module["_OrtCreateRunOptions"] = wasmExports["Va"])(a0, a1, a2, a3);
 
-var _OrtAddRunConfigEntry = Module["_OrtAddRunConfigEntry"] = (a0, a1, a2) => (_OrtAddRunConfigEntry = Module["_OrtAddRunConfigEntry"] = wasmExports["Va"])(a0, a1, a2);
+var _OrtAddRunConfigEntry = Module["_OrtAddRunConfigEntry"] = (a0, a1, a2) => (_OrtAddRunConfigEntry = Module["_OrtAddRunConfigEntry"] = wasmExports["Wa"])(a0, a1, a2);
 
-var _OrtReleaseRunOptions = Module["_OrtReleaseRunOptions"] = a0 => (_OrtReleaseRunOptions = Module["_OrtReleaseRunOptions"] = wasmExports["Wa"])(a0);
+var _OrtReleaseRunOptions = Module["_OrtReleaseRunOptions"] = a0 => (_OrtReleaseRunOptions = Module["_OrtReleaseRunOptions"] = wasmExports["Xa"])(a0);
 
-var _OrtCreateBinding = Module["_OrtCreateBinding"] = a0 => (_OrtCreateBinding = Module["_OrtCreateBinding"] = wasmExports["Xa"])(a0);
+var _OrtCreateBinding = Module["_OrtCreateBinding"] = a0 => (_OrtCreateBinding = Module["_OrtCreateBinding"] = wasmExports["Ya"])(a0);
 
-var _OrtBindInput = Module["_OrtBindInput"] = (a0, a1, a2) => (_OrtBindInput = Module["_OrtBindInput"] = wasmExports["Ya"])(a0, a1, a2);
+var _OrtBindInput = Module["_OrtBindInput"] = (a0, a1, a2) => (_OrtBindInput = Module["_OrtBindInput"] = wasmExports["Za"])(a0, a1, a2);
 
-var _OrtBindOutput = Module["_OrtBindOutput"] = (a0, a1, a2, a3) => (_OrtBindOutput = Module["_OrtBindOutput"] = wasmExports["Za"])(a0, a1, a2, a3);
+var _OrtBindOutput = Module["_OrtBindOutput"] = (a0, a1, a2, a3) => (_OrtBindOutput = Module["_OrtBindOutput"] = wasmExports["_a"])(a0, a1, a2, a3);
 
-var _OrtClearBoundOutputs = Module["_OrtClearBoundOutputs"] = a0 => (_OrtClearBoundOutputs = Module["_OrtClearBoundOutputs"] = wasmExports["_a"])(a0);
+var _OrtClearBoundOutputs = Module["_OrtClearBoundOutputs"] = a0 => (_OrtClearBoundOutputs = Module["_OrtClearBoundOutputs"] = wasmExports["$a"])(a0);
 
-var _OrtReleaseBinding = Module["_OrtReleaseBinding"] = a0 => (_OrtReleaseBinding = Module["_OrtReleaseBinding"] = wasmExports["$a"])(a0);
+var _OrtReleaseBinding = Module["_OrtReleaseBinding"] = a0 => (_OrtReleaseBinding = Module["_OrtReleaseBinding"] = wasmExports["ab"])(a0);
 
-var _OrtRunWithBinding = Module["_OrtRunWithBinding"] = (a0, a1, a2, a3, a4) => (_OrtRunWithBinding = Module["_OrtRunWithBinding"] = wasmExports["ab"])(a0, a1, a2, a3, a4);
+var _OrtRunWithBinding = Module["_OrtRunWithBinding"] = (a0, a1, a2, a3, a4) => (_OrtRunWithBinding = Module["_OrtRunWithBinding"] = wasmExports["bb"])(a0, a1, a2, a3, a4);
 
-var _OrtRun = Module["_OrtRun"] = (a0, a1, a2, a3, a4, a5, a6, a7) => (_OrtRun = Module["_OrtRun"] = wasmExports["bb"])(a0, a1, a2, a3, a4, a5, a6, a7);
+var _OrtRun = Module["_OrtRun"] = (a0, a1, a2, a3, a4, a5, a6, a7) => (_OrtRun = Module["_OrtRun"] = wasmExports["cb"])(a0, a1, a2, a3, a4, a5, a6, a7);
 
-var _OrtEndProfiling = Module["_OrtEndProfiling"] = a0 => (_OrtEndProfiling = Module["_OrtEndProfiling"] = wasmExports["cb"])(a0);
+var _OrtEndProfiling = Module["_OrtEndProfiling"] = a0 => (_OrtEndProfiling = Module["_OrtEndProfiling"] = wasmExports["db"])(a0);
 
-var _JsepOutput = Module["_JsepOutput"] = (a0, a1, a2) => (_JsepOutput = Module["_JsepOutput"] = wasmExports["db"])(a0, a1, a2);
+var _JsepOutput = Module["_JsepOutput"] = (a0, a1, a2) => (_JsepOutput = Module["_JsepOutput"] = wasmExports["eb"])(a0, a1, a2);
 
-var _JsepGetNodeName = Module["_JsepGetNodeName"] = a0 => (_JsepGetNodeName = Module["_JsepGetNodeName"] = wasmExports["eb"])(a0);
+var _JsepGetNodeName = Module["_JsepGetNodeName"] = a0 => (_JsepGetNodeName = Module["_JsepGetNodeName"] = wasmExports["fb"])(a0);
 
-var _pthread_self = () => (_pthread_self = wasmExports["fb"])();
+var _pthread_self = () => (_pthread_self = wasmExports["gb"])();
 
-var _free = Module["_free"] = a0 => (_free = Module["_free"] = wasmExports["gb"])(a0);
+var _free = Module["_free"] = a0 => (_free = Module["_free"] = wasmExports["hb"])(a0);
 
-var _malloc = Module["_malloc"] = a0 => (_malloc = Module["_malloc"] = wasmExports["hb"])(a0);
+var _malloc = Module["_malloc"] = a0 => (_malloc = Module["_malloc"] = wasmExports["ib"])(a0);
 
-var __emscripten_tls_init = () => (__emscripten_tls_init = wasmExports["ib"])();
+var __emscripten_tls_init = () => (__emscripten_tls_init = wasmExports["jb"])();
 
-var __emscripten_thread_init = (a0, a1, a2, a3, a4, a5) => (__emscripten_thread_init = wasmExports["kb"])(a0, a1, a2, a3, a4, a5);
+var __emscripten_thread_init = (a0, a1, a2, a3, a4, a5) => (__emscripten_thread_init = wasmExports["lb"])(a0, a1, a2, a3, a4, a5);
 
-var __emscripten_thread_crashed = () => (__emscripten_thread_crashed = wasmExports["lb"])();
+var __emscripten_thread_crashed = () => (__emscripten_thread_crashed = wasmExports["mb"])();
 
 var _emscripten_main_thread_process_queued_calls = () => (_emscripten_main_thread_process_queued_calls = wasmExports["emscripten_main_thread_process_queued_calls"])();
 
 var _emscripten_main_runtime_thread_id = () => (_emscripten_main_runtime_thread_id = wasmExports["emscripten_main_runtime_thread_id"])();
 
-var __emscripten_run_on_main_thread_js = (a0, a1, a2, a3, a4) => (__emscripten_run_on_main_thread_js = wasmExports["mb"])(a0, a1, a2, a3, a4);
+var __emscripten_run_on_main_thread_js = (a0, a1, a2, a3, a4) => (__emscripten_run_on_main_thread_js = wasmExports["nb"])(a0, a1, a2, a3, a4);
 
-var __emscripten_thread_free_data = a0 => (__emscripten_thread_free_data = wasmExports["nb"])(a0);
+var __emscripten_thread_free_data = a0 => (__emscripten_thread_free_data = wasmExports["ob"])(a0);
 
-var __emscripten_thread_exit = a0 => (__emscripten_thread_exit = wasmExports["ob"])(a0);
+var __emscripten_thread_exit = a0 => (__emscripten_thread_exit = wasmExports["pb"])(a0);
 
-var __emscripten_check_mailbox = () => (__emscripten_check_mailbox = wasmExports["pb"])();
+var __emscripten_check_mailbox = () => (__emscripten_check_mailbox = wasmExports["qb"])();
 
 var _setThrew = (a0, a1) => (_setThrew = wasmExports["setThrew"])(a0, a1);
 
-var _emscripten_stack_set_limits = (a0, a1) => (_emscripten_stack_set_limits = wasmExports["qb"])(a0, a1);
+var _emscripten_stack_set_limits = (a0, a1) => (_emscripten_stack_set_limits = wasmExports["rb"])(a0, a1);
 
-var __emscripten_stack_restore = a0 => (__emscripten_stack_restore = wasmExports["rb"])(a0);
+var __emscripten_stack_restore = a0 => (__emscripten_stack_restore = wasmExports["sb"])(a0);
 
-var __emscripten_stack_alloc = a0 => (__emscripten_stack_alloc = wasmExports["sb"])(a0);
+var __emscripten_stack_alloc = a0 => (__emscripten_stack_alloc = wasmExports["tb"])(a0);
 
-var _emscripten_stack_get_current = () => (_emscripten_stack_get_current = wasmExports["tb"])();
+var _emscripten_stack_get_current = () => (_emscripten_stack_get_current = wasmExports["ub"])();
 
 var ___cxa_decrement_exception_refcount = a0 => (___cxa_decrement_exception_refcount = wasmExports["__cxa_decrement_exception_refcount"])(a0);
 
 var ___cxa_increment_exception_refcount = a0 => (___cxa_increment_exception_refcount = wasmExports["__cxa_increment_exception_refcount"])(a0);
 
-var ___cxa_is_pointer_type = a0 => (___cxa_is_pointer_type = wasmExports["ub"])(a0);
+var ___cxa_is_pointer_type = a0 => (___cxa_is_pointer_type = wasmExports["vb"])(a0);
 
-var dynCall_ii = Module["dynCall_ii"] = (a0, a1) => (dynCall_ii = Module["dynCall_ii"] = wasmExports["vb"])(a0, a1);
+var dynCall_ii = Module["dynCall_ii"] = (a0, a1) => (dynCall_ii = Module["dynCall_ii"] = wasmExports["wb"])(a0, a1);
 
-var _asyncify_start_unwind = a0 => (_asyncify_start_unwind = wasmExports["wb"])(a0);
+var _asyncify_start_unwind = a0 => (_asyncify_start_unwind = wasmExports["xb"])(a0);
 
-var _asyncify_stop_unwind = () => (_asyncify_stop_unwind = wasmExports["xb"])();
+var _asyncify_stop_unwind = () => (_asyncify_stop_unwind = wasmExports["yb"])();
 
-var _asyncify_start_rewind = a0 => (_asyncify_start_rewind = wasmExports["yb"])(a0);
+var _asyncify_start_rewind = a0 => (_asyncify_start_rewind = wasmExports["zb"])(a0);
 
-var _asyncify_stop_rewind = () => (_asyncify_stop_rewind = wasmExports["zb"])();
+var _asyncify_stop_rewind = () => (_asyncify_stop_rewind = wasmExports["Ab"])();
 
-var ___start_em_js = Module["___start_em_js"] = 909814;
+var ___start_em_js = Module["___start_em_js"] = 853706;
 
-var ___stop_em_js = Module["___stop_em_js"] = 910060;
+var ___stop_em_js = Module["___stop_em_js"] = 853952;
 
 function applySignatureConversions(wasmExports) {
  wasmExports = Object.assign({}, wasmExports);
  var makeWrapper_pp = f => a0 => f(a0) >>> 0;
  var makeWrapper_p = f => () => f() >>> 0;
- wasmExports["Ca"] = makeWrapper_pp(wasmExports["Ca"]);
- wasmExports["fb"] = makeWrapper_p(wasmExports["fb"]);
- wasmExports["hb"] = makeWrapper_pp(wasmExports["hb"]);
+ wasmExports["Da"] = makeWrapper_pp(wasmExports["Da"]);
+ wasmExports["gb"] = makeWrapper_p(wasmExports["gb"]);
+ wasmExports["ib"] = makeWrapper_pp(wasmExports["ib"]);
  wasmExports["emscripten_main_runtime_thread_id"] = makeWrapper_p(wasmExports["emscripten_main_runtime_thread_id"]);
- wasmExports["sb"] = makeWrapper_pp(wasmExports["sb"]);
- wasmExports["tb"] = makeWrapper_p(wasmExports["tb"]);
+ wasmExports["tb"] = makeWrapper_pp(wasmExports["tb"]);
+ wasmExports["ub"] = makeWrapper_p(wasmExports["ub"]);
  return wasmExports;
 }
 

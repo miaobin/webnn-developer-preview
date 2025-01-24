@@ -24,7 +24,7 @@ function getConfig() {
     const query = window.location.search.substring(1);
     var config = {
         model: location.href.includes("github.io")
-            ? "https://huggingface.co/microsoft/sd-turbo-webnn/resolve/main"
+            ? "https://huggingface.co/miaobin/webnn-int32-models/resolve/main"
             : "models",
         mode: "none",
         safetychecker: true,
@@ -228,7 +228,7 @@ async function load_models(models) {
             let modelUrl;
             if (name == "text_encoder") {
                 modelNameInLog = "Text Encoder";
-                modelUrl = `${config.model}/${name}/model_layernorm.onnx`;
+                modelUrl = `${config.model}/${name}/text-encoder-int32.onnx`;
             } else if (name == "unet") {
                 modelNameInLog = "UNet";
                 modelUrl = `${config.model}/${name}/model_layernorm.onnx`;
