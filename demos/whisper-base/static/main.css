@@ -199,6 +199,7 @@ h1.title span {
 #result-show.show .indicator #latency {
     background-color: var(--pink);
     padding: 2px 6px;
+    font-size: 30px;
 }
 
 #result-show #audio-processing {
@@ -214,6 +215,7 @@ h1.title span {
     justify-content: space-evenly;
     background-color: var(--pink);
     padding: 2px 6px;
+    font-size: 30px;
 }
 
 #audio-processing div {
